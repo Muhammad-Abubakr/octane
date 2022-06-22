@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:device_apps/device_apps.dart';
+import 'package:octane/screens/history.dart';
+import 'package:octane/screens/home.dart';
+import 'package:octane/screens/profile.dart';
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
+
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  // ! state
+  var currentIdx = 0;
+  final screens = const [Home(), History(), Profile()];
 
   // getting applications from device
   Future getApplications() async {
@@ -19,6 +31,7 @@ class App extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
+      body: IndexedStack(index: currentIdx, children: screens),
       bottomNavigationBar: Card(
         elevation: 5,
         color: const Color.fromARGB(255, 37, 44, 73),
@@ -28,7 +41,11 @@ class App extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    currentIdx = 0;
+                  });
+                },
                 style: ButtonStyle(
                   shape: MaterialStateProperty.resolveWith(getBorder),
                 ),
@@ -36,7 +53,11 @@ class App extends StatelessWidget {
                     color: Color.fromARGB(255, 160, 204, 109), size: 32),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    currentIdx = 1;
+                  });
+                },
                 style: ButtonStyle(
                   shape: MaterialStateProperty.resolveWith(getBorder),
                 ),
@@ -44,7 +65,11 @@ class App extends StatelessWidget {
                     color: Color.fromARGB(255, 255, 156, 156), size: 32),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    currentIdx = 2;
+                  });
+                },
                 style: ButtonStyle(
                   shape: MaterialStateProperty.resolveWith(getBorder),
                 ),

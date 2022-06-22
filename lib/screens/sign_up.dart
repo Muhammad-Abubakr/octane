@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:octane/screens/app.dart';
+import 'package:octane/screens/sign_in.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({Key? key}) : super(key: key);
@@ -88,7 +90,13 @@ class SignUp extends StatelessWidget {
                         vertical: 16.0,
                       ),
                       child: ElevatedButton(
-                          onPressed: () {}, child: const Text("Sign Up")),
+                          onPressed: () {
+                            Navigator.of(context)
+                                .push(MaterialPageRoute(builder: (_) {
+                              return const App();
+                            }));
+                          },
+                          child: const Text("Sign Up")),
                     ),
                   ],
                 ),
@@ -103,7 +111,11 @@ class SignUp extends StatelessWidget {
         children: <Widget>[
           const Text("Already have an Account?"),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                return const SignIn();
+              }));
+            },
             child: const Text("Sign In"),
           )
         ],

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:octane/screens/app.dart';
+import 'package:octane/screens/sign_up.dart';
 
 class SignIn extends StatelessWidget {
   const SignIn({Key? key}) : super(key: key);
@@ -67,6 +69,7 @@ class SignIn extends StatelessWidget {
                     const Padding(
                       padding: EdgeInsets.all(4.0),
                       child: TextField(
+                        cursorColor: Colors.white,
                         decoration: InputDecoration(
                           labelText: "confirm password",
                           border: OutlineInputBorder(
@@ -76,7 +79,12 @@ class SignIn extends StatelessWidget {
                       ),
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (_) {
+                          return const App();
+                        }));
+                      },
                       child: const Text("Sign In"),
                     ),
                   ],
@@ -93,7 +101,11 @@ class SignIn extends StatelessWidget {
         children: <Widget>[
           const Text("Don't have an account?"),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                return const SignUp();
+              }));
+            },
             child: const Text("Sign Up"),
           )
         ],

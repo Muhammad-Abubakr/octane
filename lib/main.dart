@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:octane/screens/app.dart';
 
-import './screens/sign_up.dart';
+// import './screens/app.dart';
+// import './screens/sign_up.dart';
 import './screens/sign_in.dart';
 
 void main() {
@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const App(),
+      home: const SignIn(),
     );
   }
 }
