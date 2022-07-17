@@ -7,6 +7,10 @@ class History extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
+      body: SizedBox(
+        height: MediaQuery.of(context).size.height -
+            MediaQuery.of(context).padding.top,
+      ),
     );
   }
 }

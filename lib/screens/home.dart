@@ -1,45 +1,72 @@
+// flutter imports
 import 'package:flutter/material.dart';
-import 'package:octane/models/logo.dart';
+
+// local imports
 import 'package:octane/screens/sign_in.dart';
 
+// ? Home
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
+  // ? Build
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.symmetric(
-          vertical: MediaQuery.of(context).padding.top * 1.2,
-          horizontal: MediaQuery.of(context).size.width * 0.1),
-      // height: MediaQuery.of(context).size.height -
-      // MediaQuery.of(context).padding.top,
-      color: Theme.of(context).primaryColor,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Logo(),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                children: [
-                  const Text("Username"),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: ((context) => SignIn())));
-                    },
-                    child: const Text("Log Out"),
-                  ),
-                ],
+    // ? HOMEPAGE WIDGET TREE
+    /*
+      This Container contains the components for the headers
+      the widget tree should look like following
+
+                      Container
+                          |
+                      ListTile
+                      /   |   \
+          leading ~  /    |    \ ~ trailing // ! trailing altered
+                    /     |     \ 
+            CircleAvatar  |   TextButton
+                 |        |         |
+                 |      title       |
+                 |        ~         |
+                 |    FittedBox     |
+                 |        |         |
+                 |      Text        |
+                 | Hello,`$Username`|
+                 |                  |
+                 |                  |
+                 |                  |
+        Icon(Icons.person)   Icon(Icons.logout)
+    
+    */
+
+    return Scaffold(
+      backgroundColor: Theme.of(context).primaryColor,
+      appBar: PreferredSize(
+        preferredSize:
+            Size.fromHeight(MediaQuery.of(context).size.height * 0.2),
+        child: Container(
+          // color: const Color.fromARGB(255, 37, 44, 73),
+          margin: EdgeInsets.only(
+            top: MediaQuery.of(context).padding.top * 1,
+          ),
+          child: LayoutBuilder(
+            builder: (context, constraints) => ListTile(
+              leading: CircleAvatar(
+                radius: constraints.maxWidth * 0.05,
+                backgroundColor: Colors.blueAccent,
+                // ignore: prefer_const_constructors
+                child: Icon(color: Colors.white70, Icons.person),
               ),
-              const CircleAvatar(
-                radius: 30,
-                child: Icon(Icons.person),
-              )
-            ],
-          )
-        ],
+              title: const FittedBox(
+                alignment: Alignment.centerLeft,
+                fit: BoxFit.scaleDown,
+                child: Text("Hello, Abubakr!"),
+              ),
+              trailing: TextButton.icon(
+                  onPressed: () {},
+                  icon: Icon(Icons.logout_outlined),
+                  label: Text("logout")),
+            ),
+          ),
+        ),
       ),
     );
   }

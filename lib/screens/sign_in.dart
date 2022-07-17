@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:octane/models/logo.dart';
 import 'package:octane/screens/app.dart';
 import 'package:octane/screens/sign_up.dart';
 
@@ -7,95 +8,58 @@ class SignIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isLandscape =
+        MediaQuery.of(context).orientation == Orientation.landscape;
+    int devicePaddingScaler = isLandscape ? 5 : 1;
+
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
-      // ! body
-      body: SingleChildScrollView(
-        child: Container(
+      body: Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.only(
+          top: MediaQuery.of(context).padding.top,
+        ),
+        height: MediaQuery.of(context).size.height -
+            MediaQuery.of(context).padding.top,
+        child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(
-            horizontal: MediaQuery.of(context).size.width * 0.1,
+            horizontal:
+                MediaQuery.of(context).padding.top * devicePaddingScaler,
           ),
-          height: MediaQuery.of(context).size.height -
-              MediaQuery.of(context).padding.top,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            // mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // ! LOGO
-              Flexible(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircleAvatar(
-                      radius: 60,
-                      backgroundColor: Theme.of(context).primaryColor,
-                      child: Image.asset(
-                          fit: BoxFit.scaleDown, "assets/images/Octane.png"),
-                    ),
-                    SizedBox(
-                      height: (MediaQuery.of(context).size.height -
-                              MediaQuery.of(context).padding.top) *
-                          0.01,
-                    ),
-                    // ignore: prefer_const_constructors
-                    Text(
-                      // ignore: prefer_const_constructors
-                      style: TextStyle(
-                        fontSize: 42,
-                        fontFamily: 'Tomorrow',
-                      ),
-                      "OCTANE",
-                    ),
-                  ],
+              const Logo(size: 32),
+              SizedBox(height: MediaQuery.of(context).size.shortestSide * 0.2),
+              const TextField(
+                decoration: InputDecoration(
+                  labelText: "username",
                 ),
               ),
-
-              // ! FIELDS
-              Flexible(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    const Padding(
-                      padding: EdgeInsets.all(4.0),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          labelText: "username",
-                          border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                        ),
-                      ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.all(4.0),
-                      child: TextField(
-                        cursorColor: Colors.white,
-                        decoration: InputDecoration(
-                          labelText: "confirm password",
-                          border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
-                        ),
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context)
-                            .push(MaterialPageRoute(builder: (_) {
-                          return const App();
-                        }));
-                      },
-                      child: const Text("Sign In"),
-                    ),
-                  ],
+              SizedBox(height: MediaQuery.of(context).size.shortestSide * 0.02),
+              const TextField(
+                decoration: InputDecoration(
+                  labelText: "password",
                 ),
               ),
+              SizedBox(height: MediaQuery.of(context).size.shortestSide * 0.1),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                    return const App();
+                  }));
+                },
+                // ignore: prefer_const_constructors
+                child: Text(
+                  // ignore: prefer_const_constructors
+                  style: TextStyle(color: Colors.white70),
+                  "Sign in",
+                ),
+              )
             ],
           ),
         ),
       ),
-      // ! Bottom NavBar
-
       bottomNavigationBar: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[

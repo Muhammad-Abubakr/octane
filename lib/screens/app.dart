@@ -13,8 +13,8 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   // ! state
-  var currentIdx = 0;
-  final screens = const [Home(), History(), Profile()];
+  int currentIdx = 0;
+  final List<StatelessWidget> screens = const [Home(), History(), Profile()];
 
   // getting applications from device
   Future getApplications() async {
@@ -24,8 +24,9 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
-    // get navigation bar shape
+    // get navigation bar buttons shape
     OutlinedBorder getBorder(Set<MaterialState> states) {
+      // todo | add some feedback for user when button is pressed
       return const CircleBorder();
     }
 
@@ -33,10 +34,12 @@ class _AppState extends State<App> {
       backgroundColor: Theme.of(context).primaryColor,
       body: IndexedStack(index: currentIdx, children: screens),
       bottomNavigationBar: Card(
-        elevation: 5,
+        elevation: 10,
         color: const Color.fromARGB(255, 37, 44, 73),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.symmetric(
+            vertical: MediaQuery.of(context).size.height * 0.01,
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [

@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 
 // import './screens/app.dart';
 // import './screens/sign_up.dart';
 import './screens/sign_in.dart';
 
 void main() {
-  // todo - this is just lazy work. Remember to fix it later
-  // Restricting the device orientation
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  // * FIXED
+  // // todo - this is just lazy work. Remember to fix it later
+  // // Restricting the device orientation
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations(
+  //     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
   return runApp(const MyApp());
 }
