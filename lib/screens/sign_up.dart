@@ -25,6 +25,7 @@ class SignUp extends StatelessWidget {
           padding: EdgeInsets.symmetric(
             horizontal:
                 MediaQuery.of(context).padding.top * devicePaddingScaler,
+            vertical: MediaQuery.of(context).padding.top * 1,
           ),
           child: Column(
             children: [
@@ -62,7 +63,7 @@ class SignUp extends StatelessWidget {
                 },
                 // ignore: prefer_const_constructors
                 child: Text(style: TextStyle(color: Colors.white70), "Sign up"),
-              )
+              ),
             ],
           ),
         ),
@@ -72,13 +73,14 @@ class SignUp extends StatelessWidget {
         // crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
           const Text("Already have an Account?"),
-          TextButton(
+          TextButton.icon(
+            icon: Icon(Icons.login),
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(builder: (_) {
                 return const SignIn();
               }));
             },
-            child: const Text("Sign In"),
+            label: const Text("login"),
           )
         ],
       ),

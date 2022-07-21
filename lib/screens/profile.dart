@@ -1,12 +1,67 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class Profile extends StatelessWidget {
-  const Profile({Key? key}) : super(key: key);
+  // does not really need a key for stateless widget
+  // const Profile({Key? key}) : super(key: key);
+  // removing _ keeping the constructor const because of flutter internals
+  // like how it rebuilds it's structure
+
+  // ignore: use_key_in_widget_constructors
+  const Profile();
+
+  /*
+  Build method
+
+                * Widget Tree
+
+                   Container
+                      |
+              SingleChildScrollView
+                      | 
+                    Column
+
+    Since all of content of Profile page is in a single Column
+    we will divide the column based on levels depending upon dividers
+    for better understanding
+
+  ? Level-1
+     \/
+    ____________________................Level-2
+    |                   |       // * Divider
+CircleAvatar         TextButton
+    |                   |
+    Icon                Text
+(Icons.Person)    (edit profile picture)
+
+
+              ? Level-2
+                  \/
+Level - 1....____________________________________________________________________________.... Level-3
+          |           |        |         |        |         |        |             |    // * Divider
+        Padding   TextField SizedBox TextField SizedBox TextField SizedBox        Row
+          |       (username)          (email)           (password)                 |
+        Align                                                                /------------\
+          |                                                                  |            |
+        Text                                                              Expanded    OutlinedButton
+  (edit profile picture)                                                     |            |
+                                                                            Text         Text
+                                       
+
+                                    ?  Level-3
+                                          \/
+            Level - 2...._______________________________________________   
+                        |                |             |               |
+                     Padding            Row         SizedBox         Align
+                        |            /-------\                         |
+                      Align        Text    Switch                 ElevatedButton
+                        |  (ToggleNotifications)                       |
+                      Text                                            Text
+              (Application Settings)                                 (Save)
+  */
 
   @override
   Widget build(BuildContext context) {
+    // Having different padding for different orientations
     bool isLandscape =
         MediaQuery.of(context).orientation == Orientation.landscape;
     int devicePaddingScaler = isLandscape ? 5 : 1;
@@ -25,6 +80,7 @@ class Profile extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            // ----------------------Level-1----------------------- //
             const CircleAvatar(
               backgroundColor: Color.fromRGBO(36, 43, 72, 1),
               radius: 48,
@@ -38,9 +94,11 @@ class Profile extends StatelessWidget {
               child: const Text("Edit profile picture"),
             ),
             const Divider(color: Colors.white60),
+            // ---------------------------------------------------- //
+            // ----------------------Level-2----------------------- //
             Padding(
               padding: EdgeInsets.symmetric(
-                vertical: MediaQuery.of(context).size.height * 0.025,
+                vertical: MediaQuery.of(context).size.longestSide * 0.025,
               ),
               child: const Align(
                 alignment: Alignment.centerLeft,
@@ -53,15 +111,15 @@ class Profile extends StatelessWidget {
             const TextField(
               decoration: InputDecoration(labelText: "username"),
             ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+            SizedBox(height: MediaQuery.of(context).size.longestSide * 0.01),
             const TextField(
               decoration: InputDecoration(labelText: "email"),
             ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+            SizedBox(height: MediaQuery.of(context).size.longestSide * 0.01),
             const TextField(
               decoration: InputDecoration(labelText: "password"),
             ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+            SizedBox(height: MediaQuery.of(context).size.longestSide * 0.03),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -87,9 +145,11 @@ class Profile extends StatelessWidget {
               ],
             ),
             const Divider(color: Colors.white60),
+            // ---------------------------------------------------- //
+            // ----------------------Level-3----------------------- //
             Padding(
               padding: EdgeInsets.symmetric(
-                vertical: MediaQuery.of(context).size.height * 0.025,
+                vertical: MediaQuery.of(context).size.longestSide * 0.025,
               ),
               child: const Align(
                 alignment: Alignment.centerLeft,
@@ -109,7 +169,7 @@ class Profile extends StatelessWidget {
                 )
               ],
             ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.03),
+            SizedBox(height: MediaQuery.of(context).size.longestSide * 0.03),
             Align(
               alignment: Alignment.centerRight,
               child: ElevatedButton(
@@ -124,6 +184,7 @@ class Profile extends StatelessWidget {
                     "Save"),
               ),
             )
+            // ---------------------------------------------------- //
           ],
         ),
       ),

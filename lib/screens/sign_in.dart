@@ -25,6 +25,7 @@ class SignIn extends StatelessWidget {
           padding: EdgeInsets.symmetric(
             horizontal:
                 MediaQuery.of(context).padding.top * devicePaddingScaler,
+            vertical: MediaQuery.of(context).padding.top * 1,
           ),
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.center,
@@ -43,17 +44,22 @@ class SignIn extends StatelessWidget {
                 ),
               ),
               SizedBox(height: MediaQuery.of(context).size.shortestSide * 0.1),
-              ElevatedButton(
+              ElevatedButton.icon(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (_) {
                     return const App();
                   }));
                 },
                 // ignore: prefer_const_constructors
-                child: Text(
+                icon: Icon(
+                  Icons.login,
+                  color: Colors.white70,
+                ),
+                // ignore: prefer_const_constructors
+                label: Text(
                   // ignore: prefer_const_constructors
                   style: TextStyle(color: Colors.white70),
-                  "Sign in",
+                  "Login",
                 ),
               )
             ],

@@ -13,17 +13,24 @@ void main() {
   // SystemChrome.setPreferredOrientations(
   //     [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
-  return runApp(const MyApp());
+  return runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: UniqueKey());
 
   // root
   @override
   Widget build(BuildContext context) {
+    // Using MaterialApp() since we are developing for Android Only
     return MaterialApp(
       title: 'Project Octane',
+
+      /* 
+        * Setting up the Global theme data
+        ? Contains colors (primary) and also (fontColors) 
+        ! InputDecoration theme (important)
+      */
       theme: ThemeData(
         colorScheme:
             const ColorScheme.dark().copyWith(primary: Colors.blueAccent),
@@ -51,6 +58,8 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
+
+      // ? The DefaultRoute that is displayed when the app is started
       home: const SignIn(),
     );
   }
